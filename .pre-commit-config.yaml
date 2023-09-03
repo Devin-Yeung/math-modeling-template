@@ -1,0 +1,12 @@
+repos:
+-   repo: local
+    hooks:
+    -   id: Remove jupyter running result 
+        name: Remove jupyter running result 
+        entry: jupyter 
+        language: system
+        files: 'examples/.*\.ipynb'
+        args: ["nbconvert", "--clear-output", "--inplace"]
+        require_serial: false
+        additional_dependencies: []
+        minimum_pre_commit_version: '0'
