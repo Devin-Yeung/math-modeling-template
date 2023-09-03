@@ -1,0 +1,11 @@
+name: math-modeling
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - jupyter
+  - matplotlib
+  - pandas
+  - scikit-learn
+  - numpy
+  - pre-commit
