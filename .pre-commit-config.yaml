@@ -6,7 +6,13 @@ repos:
         entry: jupyter 
         language: system
         files: 'examples/.*\.ipynb'
-        args: ["nbconvert", "--clear-output", "--inplace"]
+        args: [
+          "nbconvert",
+          "--ClearOutputPreprocessor.enabled=True",
+          "--ClearMetadataPreprocessor.enabled=True",
+          "--clear-output",
+          "--inplace",
+        ]
         require_serial: false
         additional_dependencies: []
         minimum_pre_commit_version: '0'
