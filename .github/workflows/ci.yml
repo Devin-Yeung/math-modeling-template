@@ -10,15 +10,18 @@ jobs:
   run-notebooks:
     name: Run all notebooks
     runs-on: "ubuntu-latest"
+    defaults:
+      run:
+        shell: bash -el {0}
     steps:
       - uses: actions/checkout@v3
-      - uses: conda-incubator/setup-miniconda@v2
+      - uses: conda-incubator/setup-miniconda@v2.2.0
         with:
           mamba-version: "*"
           channels: conda-forge,defaults
           channel-priority: true
-          activate-environment: math-modeling
           environment-file: environment.yml
+          activate-environment: math-modeling
           auto-activate-base: false
       - run: |
           conda info
