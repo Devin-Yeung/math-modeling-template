@@ -17,10 +17,12 @@ jobs:
       with:
         python-version: '3.8'
     - name: Install Formatter
-      run: pip install "black[jupyter]"
-    - name: Run Formatter
+      run: pip install "black[jupyter]" jupyter
+    - name: Run black Formatter
       run: |
         black .
+    - name: Clean up notebook meta info
+      run: jupyter nbconvert --ClearOutputPreprocessor.enabled=True --ClearMetadataPreprocessor.enabled=True --clear-output --inplace $(find . -type f -name "*.ipynb")
     - uses: EndBug/add-and-commit@v9
       with:
         add: |
