@@ -27,3 +27,5 @@ jobs:
           conda config --show-sources
           conda config --show
           printenv | sort
+      - name: run on all notebooks
+        run: jupyter nbconvert --to notebook --execute examples/**/*.ipynb
