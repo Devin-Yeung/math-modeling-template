@@ -23,12 +23,5 @@ jobs:
           environment-file: environment.yml
           activate-environment: math-modeling
           auto-activate-base: false
-      - run: |
-          conda info
-          conda list
-          conda env list
-          conda config --show-sources
-          conda config --show
-          printenv | sort
       - name: run on all notebooks
         run: jupyter nbconvert --to notebook --execute examples/**/*.ipynb
