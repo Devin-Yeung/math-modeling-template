@@ -1,0 +1,29 @@
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+name: CI
+jobs:
+  run-notebooks:
+    name: Run all notebooks
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          mamba-version: "*"
+          channels: conda-forge,defaults
+          channel-priority: true
+          activate-environment: math-modeling
+          environment-file: environment.yml
+          auto-activate-base: false
+      - run: |
+          conda info
+          conda list
+          conda env list
+          conda config --show-sources
+          conda config --show
+          printenv | sort
