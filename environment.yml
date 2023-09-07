@@ -10,3 +10,4 @@ dependencies:
   - scikit-learn
   - numpy
   - pre-commit
+  - "black[jupyter]"
