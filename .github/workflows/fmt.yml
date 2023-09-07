@@ -25,7 +25,9 @@ jobs:
       # remove empty cell, see https://github.com/jupyter/nbconvert/pull/575
       # remove the metadata in the notebook
       # remove the output in the notebook
-      run: jupyter nbconvert                             \
+      # https://stackoverflow.com/questions/59954185/github-action-split-long-command-into-multiple-lines
+      run: |
+        jupyter nbconvert                                \
         --ClearOutputPreprocessor.enabled=True           \
         --ClearMetadataPreprocessor.enabled=True         \
         --RegexRemovePreprocessor.enabled=True           \
