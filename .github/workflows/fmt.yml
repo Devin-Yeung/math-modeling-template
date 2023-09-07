@@ -31,7 +31,7 @@ jobs:
         --ClearOutputPreprocessor.enabled=True           \
         --ClearMetadataPreprocessor.enabled=True         \
         --RegexRemovePreprocessor.enabled=True           \
-        --RegexRemovePreprocessor.patterns="['\\s*\\Z']" \
+        --RegexRemovePreprocessor.patterns "\\s*\\Z"     \
         --clear-output                                   \
         --inplace $(find . -type f -name "*.ipynb")
     - uses: EndBug/add-and-commit@v9
