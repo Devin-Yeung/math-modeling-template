@@ -1,9 +1,9 @@
 repos:
--   repo: local
+  - repo: local
     hooks:
-    -   id: Remove jupyter running result 
-        name: Remove jupyter running result 
-        entry: jupyter 
+      - id: Remove jupyter running result
+        name: Remove jupyter running result
+        entry: jupyter
         language: system
         files: 'examples/.*\.ipynb'
         args: [
@@ -14,5 +14,21 @@ repos:
           "--inplace",
         ]
         require_serial: false
-        additional_dependencies: []
+        additional_dependencies: [ ]
+        minimum_pre_commit_version: '0'
+      - id: Remove jupyter metadata and empty cell
+        name: Remove jupyter metadata and empty cell
+        entry: jupyter
+        language: system
+        files: '.*\.ipynb'
+        args: [
+          "nbconvert",
+          --ClearMetadataPreprocessor.enabled=True,
+          --RegexRemovePreprocessor.enabled=True,
+          --RegexRemovePreprocessor.patterns,
+          "\\s*\\Z",
+          --inplace,
+        ]
+        require_serial: false
+        additional_dependencies: [ ]
         minimum_pre_commit_version: '0'
