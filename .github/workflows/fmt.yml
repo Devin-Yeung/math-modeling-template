@@ -22,7 +22,16 @@ jobs:
       run: |
         black .
     - name: Clean up notebook meta info
-      run: jupyter nbconvert --ClearOutputPreprocessor.enabled=True --ClearMetadataPreprocessor.enabled=True --clear-output --inplace $(find . -type f -name "*.ipynb")
+      # remove empty cell, see https://github.com/jupyter/nbconvert/pull/575
+      # remove the metadata in the notebook
+      # remove the output in the notebook
+      run: jupyter nbconvert                             \
+        --ClearOutputPreprocessor.enabled=True           \
+        --ClearMetadataPreprocessor.enabled=True         \
+        --RegexRemovePreprocessor.enabled=True           \
+        --RegexRemovePreprocessor.patterns="['\\s*\\Z']" \
+        --clear-output                                   \
+        --inplace $(find . -type f -name "*.ipynb")
     - uses: EndBug/add-and-commit@v9
       with:
         add: |
